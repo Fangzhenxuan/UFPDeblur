@@ -1,2 +1,0 @@
-# UFPDeblur
-coming soon
