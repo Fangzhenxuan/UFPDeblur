@@ -10,7 +10,7 @@ Zhenxuan Fang, Fangfang Wu, Weisheng Dong, Xin Li, Jinjian Wu and Guangming Shi
 <p align="center">
 <img src="/illustrations/network.png" width="1200">
 </p>
-Fig. 1 The overall framework of the proposed KULNet for blind SR.
+Fig. 1 The overall framework of the proposed UFPNet for blind SR.
 
 ## Usage
 This implementation based on [BasicSR](https://github.com/xinntao/BasicSR) and [NAFNet](https://github.com/megvii-research/NAFNet)
