@@ -214,10 +214,6 @@ class UFPNet_code_uncertainty(nn.Module):
         self.kernel_extra = code_extra_mean_var(kernel_size)
 
         self.flow = KernelPrior(n_blocks=5, input_size=19 ** 2, hidden_size=25, n_hidden=1, kernel_size=19)
-        # state_dict = torch.load('Flow_motion.pt')
-        # self.flow.load_state_dict(state_dict['model_state'])
-        # for k, v in self.flow.named_parameters():
-        #     v.requires_grad = False
 
         self.intro = nn.Conv2d(in_channels=img_channel, out_channels=width, kernel_size=3, padding=1, stride=1,
                                groups=1,
@@ -334,37 +330,4 @@ class UFPNet_code_uncertainty_Local(Local_Base, UFPNet_code_uncertainty):
         with torch.no_grad():
             self.convert(base_size=base_size, train_size=train_size, fast_imp=fast_imp)
 
-
-if __name__ == '__main__':
-    img_channel = 3
-    width = 64
-
-    # enc_blks = [2, 2, 4, 8]
-    # middle_blk_num = 12
-    # dec_blks = [2, 2, 2, 2]
-
-    enc_blks = [1, 1, 1, 28]
-    middle_blk_num = 1
-    dec_blks = [1, 1, 1, 1]
-
-    net = NAFNet_code_uncertainty_Local(img_channel=img_channel, width=width, middle_blk_num=middle_blk_num,
-                 enc_blk_nums=enc_blks, dec_blk_nums=dec_blks, kernel_size=19).cuda()
-
-    inp_shape = (3, 256, 256)
-
-    input = torch.randn((4, 3, 128, 72)).cuda()
-    # kernel = torch.randn((2, 21, 21)).cuda()
-    with torch.no_grad():
-        out = net(input)
-    print(out[1].shape)
-
-    from ptflops import get_model_complexity_info
-
-    macs, params = get_model_complexity_info(net, inp_shape, verbose=False, print_per_layer_stat=False)
-
-    params = float(params[:-3])
-    macs = float(macs[:-4])
-
-    print(macs, params)
-    # print("Total number of paramerters in networks is {}  ".format(sum(x.numel() for x in net.parameters())))
 
