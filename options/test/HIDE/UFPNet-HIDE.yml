@@ -1,0 +1,57 @@
+
+# ------------------------------------------------------------------------
+# Modified from NAFNet (https://github.com/megvii-research/NAFNet)
+# ------------------------------------------------------------------------
+# general settings
+
+name: UFPNet-HIDE
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+manual_seed: 10
+
+# dataset and data loader settings
+datasets:
+  test:
+    name: HIDE
+    type: PairedImageDataset
+
+    dataroot_gt: ./datasets/HIDE/test/target
+    dataroot_lq: ./datasets/HIDE/test/input
+
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: UFPNet_code_uncertainty_Local
+  width: 64
+  enc_blk_nums: [1, 1, 1, 28]
+  middle_blk_num: 1
+  dec_blk_nums: [1, 1, 1, 1]
+
+# path
+path:
+  pretrain_network_g: ./experiments/pretrained_models/train_on_GoPro/net_g_latest.pth
+  strict_load_g: true
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: false
+  grids: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
