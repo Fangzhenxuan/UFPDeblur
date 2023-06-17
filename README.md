@@ -2,7 +2,7 @@
 Zhenxuan Fang, Fangfang Wu, Weisheng Dong, Xin Li, Jinjian Wu and Guangming Shi
 
 [**[Paper]**](https://openaccess.thecvf.com/content/CVPR2023/papers/Fang_Self-Supervised_Non-Uniform_Kernel_Estimation_With_Flow-Based_Motion_Prior_for_Blind_CVPR_2023_paper.pdf)
-[**[Website Page]**](https://see.xidian.edu.cn/faculty/wsdong/Projects/UFPNet.htm.)
+[**[Website Page]**](https://see.xidian.edu.cn/faculty/wsdong/Projects/UFPNet.htm)
 
 
 
